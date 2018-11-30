@@ -15,6 +15,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'capybara'
 require 'capybara/rspec'
+require 'rspec'
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 
 ENV['Rack_ENV'] ||= 'test'
