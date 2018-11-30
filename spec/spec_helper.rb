@@ -13,6 +13,16 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'capybara'
+require 'capybara/rspec'
+require File.join(File.dirname(__FILE__), '..', 'app.rb')
+
+ENV['Rack_ENV'] ||= 'test'
+Capybara.app = Bookmarker
+Capybara.register_driver :seleniun_chrome do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
