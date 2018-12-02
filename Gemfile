@@ -10,6 +10,7 @@ group :test do
   gem 'capybara'
   gem 'coveralls'
   gem 'cucumber'
+  gem 'rake'
   gem 'rspec'
   gem 'rubocop'
   gem 'shotgun'
