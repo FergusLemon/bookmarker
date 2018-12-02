@@ -9,5 +9,10 @@ class Bookmarker < Sinatra::Base
 
   get '/' do
     erb :index
+    redirect '/bookmarks'
+  end
+
+  get '/bookmarks' do
+    erb :bookmarks
   end
 end
