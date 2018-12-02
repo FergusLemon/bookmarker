@@ -1,15 +1,15 @@
 class Bookmark
 
-  @@bookmarks = []
+  class << self
+    attr_reader :bookmarks
+    @@bookmarks = []
+
+    def all
+      @@bookmarks.empty? ? 'No bookmarks have been added yet.' : @@bookmarks
+    end
+  end
 
   def initialize
     @@bookmarks << self
-  end
-
-  class << self
-    def all
-      @@bookmarks unless @@bookmarks.empty?
-      'No bookmarks have been added yet.'
-    end
   end
 end
