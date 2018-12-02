@@ -9,4 +9,9 @@ feature 'Getting a List of All Bookmarks' do
     visit '/'
     should_not_see 'No bookmarks have been added yet.'
   end
+  scenario 'Viewing the list of bookmarks' do
+    allow(Bookmark).to receive(:all).and_return('https://github.com')
+    visit '/bookmarks'
+    should_see 'https://github.com'
+  end
 end
