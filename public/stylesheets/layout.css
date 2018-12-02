@@ -1,4 +1,16 @@
+h1, h2, h3, h4, h5, h6 {
+  font-family: Verdana, Georgia, Courier, serif;
+}
+
+body {
+  margin: 0;
+}
+
 #brand-header {
   text-align: left;
-  font-size: 50px
+  font-size: 50px;
+  background-color: #5DADE2;
+  margin: 0;
+  color: #F7F9F9;
+  padding-left: 40px;
 }
