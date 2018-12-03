@@ -5,11 +5,22 @@ class Bookmark
     @@bookmarks = []
 
     def all
-      @@bookmarks.empty? ? 'No bookmarks have been added yet.' : @@bookmarks
+      retrieve_bookmarks
     end
   end
 
   def initialize
     @@bookmarks << self
+  end
+
+  private
+
+  class << self
+    def retrieve_bookmarks
+      conn = PG.connect(dbname: 'bookmarker')
+      result = conn.exec('SELECT * FROM bookmarks')
+      rows = result.map { |row| row.values_at('url') }.flatten
+      rows.size.zero? ? 'No bookmarks have been added yet.' : rows
+    end
   end
 end
