@@ -1,3 +1,4 @@
+require 'pg'
 class Bookmark
 
   class << self
