@@ -16,6 +16,7 @@
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
+require 'factory_bot'
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 require File.join(File.dirname(__FILE__), '.', 'support', 'helpers.rb')
 
@@ -30,6 +31,10 @@ RSpec.configure do |config|
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
   config.include CapybaraHelpers, type: :feature
+  config.include FactoryBot::Syntax::Methods
+  config.before(:suite) do
+    FactoryBot.find_definitions
+  end
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
