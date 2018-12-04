@@ -4,7 +4,7 @@ require File.join(File.dirname(__FILE__), 'lib', 'bookmark')
 class Bookmarker < Sinatra::Base
 
   before do
-    @bookmark_list = Bookmark.all
+    @bookmarks = Bookmark.all
   end
 
   get '/' do
