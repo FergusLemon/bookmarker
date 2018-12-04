@@ -14,6 +14,14 @@ class Bookmark
     @@bookmarks << self
   end
 
+  def create_bookmark(url)
+    if ENV['RACK_ENV'] == 'test'
+      conn = PG.connect(dbname: 'bookmarker_test')
+    else
+      conn = PG.connect(dbname: 'bookmarker')
+    end
+    conn.exec("INSERT INTO bookmarks(url) VALUES('#{url}');")
+  end
   private
 
   class << self
