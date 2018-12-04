@@ -18,8 +18,7 @@ describe Bookmark do
     end
     context 'when one bookmark has been added' do
       it 'should return the bookmark' do
-        bookmark
-        conn.exec("INSERT INTO bookmarks(url) VALUES('https://reddit.com')")
+        conn.exec("INSERT INTO bookmarks(url) VALUES('https://reddit.com');")
         expect(described_class.all).to include(db_bookmark)
       end
     end
