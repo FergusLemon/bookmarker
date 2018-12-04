@@ -25,9 +25,9 @@ describe Bookmark do
     end
   end
 
-  describe '#create_bookmark' do
+  describe '#initialize' do
     it 'adds a new bookmark to the bookmark list' do
-      bookmark.create_bookmark(db_bookmark)
+      described_class.new(db_bookmark)
       expect(bookmarks).to include(db_bookmark)
     end
   end
