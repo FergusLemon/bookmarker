@@ -1,3 +1,12 @@
 <div>
   <%= "#{@bookmark_list}" %>
 </div>
+<form action="/bookmarks" method="post">
+  <p id="add-bookmark-message">
+    If you would like to add a new bookmark, enter the URL below:
+  </p>
+  <input id="enter-url" type="text" name="bookmark" placeholder="Enter URL"
+  alt="Text box to type a URL in"/>
+  <input id="add-bookmark" type="submit" name="add-bookmark"
+  value="Add Bookmark" alt="Button to submit a new bookmark"/>
+</form>
