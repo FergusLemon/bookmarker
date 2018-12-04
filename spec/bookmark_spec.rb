@@ -2,7 +2,8 @@ require 'bookmark'
 
 describe Bookmark do
   let(:bookmark) { described_class.new }
-  let(:db_bookmark) { 'http://reddit.com' }
+  let(:db_bookmark) { 'https://reddit.com' }
+  let(:conn) { PG.connect(dbname: 'bookmarker_test') }
 
   describe '::all' do
     context 'when no bookmarks have been added' do
@@ -18,6 +19,7 @@ describe Bookmark do
     context 'when one bookmark has been added' do
       it 'should return the bookmark' do
         bookmark
+        conn.exec("INSERT INTO bookmarks(url) VALUES('https://reddit.com')")
         expect(described_class.all).to include(db_bookmark)
       end
     end
