@@ -1,17 +1,13 @@
-feature 'Getting a List of All Bookmarks' do
-  scenario 'When no bookmarks have been added' do
-    allow(Bookmark).to receive(:all).and_return('No bookmarks have been added yet.')
-    visit '/'
+feature 'Viewing Bookmarks' do
+  scenario 'Sees a message if no bookmarks have been added' do
+    visit '/bookmarks'
     should_see 'No bookmarks have been added yet.'
   end
-  scenario 'When bookmarks have been added' do
-    allow(Bookmark).to receive(:all).and_return('https://github.com')
-    visit '/'
-    should_not_see 'No bookmarks have been added yet.'
-  end
-  scenario 'Viewing the list of bookmarks' do
-    allow(Bookmark).to receive(:all).and_return('https://github.com')
+  scenario 'Sees bookmarks that have been added' do
+    conn = PG.connect(dbname: 'bookmarker_test')
+    conn.exec("INSERT INTO bookmarks(url) VALUES('https://github.com');")
     visit '/bookmarks'
+    should_not_see 'No bookmarks have been added yet.'
     should_see 'https://github.com'
   end
 end
