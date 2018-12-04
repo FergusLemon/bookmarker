@@ -19,9 +19,11 @@ require 'rspec'
 require 'factory_bot'
 require 'pg'
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
-require File.join(File.dirname(__FILE__), '.', 'support', 'helpers.rb')
+require File.join(File.dirname(__FILE__), '.', 'support', 'capybara_helpers.rb')
+require File.join(File.dirname(__FILE__), '.', 'support', 'setup_test_database.rb')
 
-ENV['Rack_ENV'] ||= 'test'
+ENV['RACK_ENV'] ||= 'test'
+
 Capybara.app = Bookmarker
 Capybara.register_driver :seleniun_chrome do |app|
   Capybara::Selenium::Driver.new(app, :browser => :chrome)
@@ -32,10 +34,17 @@ RSpec.configure do |config|
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
   config.include CapybaraHelpers, type: :feature
+
   config.include FactoryBot::Syntax::Methods
   config.before(:suite) do
     FactoryBot.find_definitions
   end
+
+  config.include DatabaseHelpers
+  config.before(:each) do
+    truncate_table
+  end
+
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
