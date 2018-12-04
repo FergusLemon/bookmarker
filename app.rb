@@ -15,4 +15,10 @@ class Bookmarker < Sinatra::Base
   get '/bookmarks' do
     erb :bookmarks
   end
+
+  post '/bookmarks' do
+    url = params['url']
+    @bookmark_list << url
+    erb :bookmarks
+  end
 end
