@@ -18,7 +18,7 @@ class Bookmarker < Sinatra::Base
 
   post '/bookmarks' do
     url = params['url']
-    @bookmark_list << url
-    erb :bookmarks
+    Bookmark.new(url)
+    redirect '/bookmarks'
   end
 end
