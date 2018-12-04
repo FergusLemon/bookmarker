@@ -10,11 +10,7 @@ class Bookmark
     end
   end
 
-  def initialize
-    @@bookmarks << self
-  end
-
-  def create_bookmark(url)
+  def initialize(url)
     if ENV['RACK_ENV'] == 'test'
       conn = PG.connect(dbname: 'bookmarker_test')
     else
@@ -22,6 +18,7 @@ class Bookmark
     end
     conn.exec("INSERT INTO bookmarks(url) VALUES('#{url}');")
   end
+
   private
 
   class << self
