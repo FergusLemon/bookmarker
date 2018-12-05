@@ -1,9 +1,10 @@
 require 'bookmark'
 
 describe Bookmark do
+  let(:id) { 1 }
   let(:url) { 'https://reddit.com' }
   let(:title) { 'Reddit Homepage' }
-  let(:bookmark) { described_class.new(url, title) }
+  let(:bookmark) { described_class.new(id: id, url: url, title: title) }
   let(:connection) { PG.connect(dbname: 'bookmarker_test') }
   let(:bookmark_class) { described_class }
   let(:bookmarks) { described_class.all }
@@ -29,6 +30,24 @@ describe Bookmark do
     it 'should add a bookmark to the database table' do
       bookmark_class.create(url, title)
       expect(bookmarks).to include(url)
+    end
+  end
+
+  describe '#id' do
+    it 'should return the id of the bookmark' do
+      expect(bookmark.id).to eq(id)
+    end
+  end
+
+  describe '#url' do
+    it 'should return the url of the bookmark' do
+      expect(bookmark.url).to eq(url)
+    end
+  end
+
+  describe '#title' do
+    it 'should return the title of the bookmark' do
+      expect(bookmark.title).to eq(title)
     end
   end
 end
