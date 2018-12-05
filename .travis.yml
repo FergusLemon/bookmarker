@@ -4,4 +4,4 @@ rvm:
 services: postgresql
 
 before_script:
-  - psql -c 'create database bookmarker;'
+  - psql -c 'create database bookmarker;' -U postgres
