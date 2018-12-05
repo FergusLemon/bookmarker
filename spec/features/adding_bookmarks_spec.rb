@@ -2,6 +2,7 @@ feature 'Adding Bookmarks' do
   scenario 'Sees an option to add a bookmark' do
     visit '/bookmarks'
     expect(page).to have_css('#enter-url')
+    expect(page).to have_css('#enter-title')
     expect(page).to have_css('#add-bookmark')
   end
   scenario 'Sees the new bookmark in the list after adding a new bookmark' do
