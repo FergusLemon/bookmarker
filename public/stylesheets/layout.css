@@ -20,7 +20,7 @@ body {
   padding: 20px 40px;
 }
 
-#enter-url {
+#enter-url, #enter-title {
   font-size: 15px;
   width: 50%;
   display: block;
