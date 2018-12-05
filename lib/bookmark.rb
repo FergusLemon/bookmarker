@@ -2,9 +2,6 @@ require 'pg'
 class Bookmark
 
   class << self
-    attr_reader :bookmarks
-    @@bookmarks = []
-
     def all
       retrieve_bookmarks
     end
@@ -30,7 +27,6 @@ class Bookmark
       end
       result = connection.exec('SELECT * FROM bookmarks')
       rows = result.map { |row| row.values_at('url') }.flatten
-      rows.size.zero? ? 'No bookmarks have been added yet.' : rows
     end
   end
 end
