@@ -7,13 +7,13 @@ class Bookmark
     end
   end
 
-  def initialize(url)
+  def initialize(url, title)
     if ENV['RACK_ENV'] == 'test'
       connection = PG.connect(dbname: 'bookmarker_test')
     else
       connection = PG.connect(dbname: 'bookmarker')
     end
-    connection.exec("INSERT INTO bookmarks(url) VALUES('#{url}');")
+    connection.exec("INSERT INTO bookmarks(url, title) VALUES('#{url}', '#{title}');")
   end
 
   private
@@ -26,7 +26,7 @@ class Bookmark
         connection = PG.connect(dbname: 'bookmarker')
       end
       result = connection.exec('SELECT * FROM bookmarks')
-      rows = result.map { |row| row.values_at('url') }.flatten
+      result.map { |row| row.values_at('url') }.flatten
     end
   end
 end
