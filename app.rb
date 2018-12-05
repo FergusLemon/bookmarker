@@ -18,7 +18,8 @@ class Bookmarker < Sinatra::Base
 
   post '/bookmarks' do
     url = params['url']
-    Bookmark.new(url)
+    title = params['title']
+    Bookmark.new(url, title)
     redirect '/bookmarks'
   end
 end
