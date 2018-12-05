@@ -32,8 +32,14 @@ attr_reader :id, :url, :title
 
     def retrieve_bookmarks
       connection = choose_database_connection
-      result = connection.exec('SELECT * FROM bookmarks')
-      result.map { |row| row.values_at('url') }.flatten
+      bookmarks_data = connection.exec('SELECT * FROM bookmarks')
+      wrap_database_results(bookmarks_data)
+    end
+
+    def wrap_database_results(bookmarks_data)
+      bookmarks_data.map do |bookmark|
+        self.new(id: bookmark['id'], url: bookmark['url'], title: bookmark['title'])
+      end
     end
   end
 end
