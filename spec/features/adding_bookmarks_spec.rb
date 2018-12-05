@@ -8,7 +8,8 @@ feature 'Adding Bookmarks' do
   scenario 'Sees the new bookmark in the list after adding a new bookmark' do
     visit '/bookmarks'
     fill_in('url', :with => 'https://github.com')
+    fill_in('title', :with => 'Github Homepage')
     click_on 'add-bookmark'
-    expect(page).to have_content('https://github.com')
+    expect(page).to have_content('Github Homepage')
   end
 end

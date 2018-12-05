@@ -7,6 +7,6 @@ feature 'Viewing Bookmarks' do
     Bookmark.create('https://github.com', 'Github Homepage')
     visit '/bookmarks'
     should_not_see 'No bookmarks have been added yet.'
-    should_see 'https://github.com'
+    should_see 'Github Homepage'
   end
 end
