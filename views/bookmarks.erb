@@ -15,7 +15,7 @@
   <% else %>
     <% @bookmarks.each do |bookmark| %>
       <tr>
-        <td><%= bookmark.url %></td>
+        <td><a href=<%= bookmark.url %>><%= bookmark.title %></a></td>
       </tr>
     <% end %>
   <% end %>
