@@ -5,26 +5,29 @@ class Bookmark
     def all
       retrieve_bookmarks
     end
+
+    def create(url, title)
+      connection = choose_database_connection
+      connection.exec("INSERT INTO bookmarks(url, title) VALUES('#{url}', '#{title}');")
+    end
   end
 
-  def initialize(url, title)
-    if ENV['RACK_ENV'] == 'test'
-      connection = PG.connect(dbname: 'bookmarker_test')
-    else
-      connection = PG.connect(dbname: 'bookmarker')
-    end
-    connection.exec("INSERT INTO bookmarks(url, title) VALUES('#{url}', '#{title}');")
+  def initialize(*args)
   end
 
   private
 
   class << self
-    def retrieve_bookmarks
+    def choose_database_connection
       if ENV['RACK_ENV'] == 'test'
-        connection = PG.connect(dbname: 'bookmarker_test')
+        PG.connect(dbname: 'bookmarker_test')
       else
-        connection = PG.connect(dbname: 'bookmarker')
+        PG.connect(dbname: 'bookmarker')
       end
+    end
+
+    def retrieve_bookmarks
+      connection = choose_database_connection
       result = connection.exec('SELECT * FROM bookmarks')
       result.map { |row| row.values_at('url') }.flatten
     end
