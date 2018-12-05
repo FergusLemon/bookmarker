@@ -12,11 +12,11 @@ class Bookmark
 
   def initialize(url)
     if ENV['RACK_ENV'] == 'test'
-      conn = PG.connect(dbname: 'bookmarker_test')
+      connection = PG.connect(dbname: 'bookmarker_test')
     else
-      conn = PG.connect(dbname: 'bookmarker')
+      connection = PG.connect(dbname: 'bookmarker')
     end
-    conn.exec("INSERT INTO bookmarks(url) VALUES('#{url}');")
+    connection.exec("INSERT INTO bookmarks(url) VALUES('#{url}');")
   end
 
   private
@@ -24,11 +24,11 @@ class Bookmark
   class << self
     def retrieve_bookmarks
       if ENV['RACK_ENV'] == 'test'
-        conn = PG.connect(dbname: 'bookmarker_test')
+        connection = PG.connect(dbname: 'bookmarker_test')
       else
-        conn = PG.connect(dbname: 'bookmarker')
+        connection = PG.connect(dbname: 'bookmarker')
       end
-      result = conn.exec('SELECT * FROM bookmarks')
+      result = connection.exec('SELECT * FROM bookmarks')
       rows = result.map { |row| row.values_at('url') }.flatten
       rows.size.zero? ? 'No bookmarks have been added yet.' : rows
     end
