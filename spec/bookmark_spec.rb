@@ -1,7 +1,7 @@
 require 'bookmark'
 
 describe Bookmark do
-  let(:id) { 1 }
+  let(:id) { '1' }
   let(:url) { 'https://reddit.com' }
   let(:title) { 'Reddit Homepage' }
   let(:bookmark) { described_class.new(id: id, url: url, title: title) }
@@ -15,13 +15,13 @@ describe Bookmark do
         expect(bookmarks).to be_empty
       end
       it 'should not return a bookmark' do
-        expect(bookmarks).not_to include(url)
+        expect(bookmarks).not_to include(bookmark)
       end
     end
     context 'when one bookmark has been added' do
-      it 'should return the bookmark' do
+      it 'should include the bookmark' do
         connection.exec("INSERT INTO bookmarks(url, title) VALUES('https://reddit.com', 'Reddit Homepage');")
-        expect(bookmarks).to include(url)
+        expect(bookmarks.last.url).to eq(bookmark.url)
       end
     end
   end
@@ -29,7 +29,7 @@ describe Bookmark do
   describe '::create' do
     it 'should add a bookmark to the database table' do
       bookmark_class.create(url, title)
-      expect(bookmarks).to include(url)
+      expect(bookmarks.last.title).to eq(bookmark.title)
     end
   end
 
