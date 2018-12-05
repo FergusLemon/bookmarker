@@ -2,13 +2,21 @@
   <form action="/bookmarks" method="post">
     <input id="enter-url" type="text" name="url" placeholder="Enter URL"
     alt="Text box to type a URL in"/>
+    <input id="enter-title" type="text" name="title" placeholder="Enter Title"
+    alt="Text box to type a title in"/>
     <input id="add-bookmark" type="submit" name="add-bookmark"
     value="Add Bookmark" alt="Button to submit a new bookmark"/>
   </form>
 </div>
 <br/>
-<ul>
-  <% @bookmarks.each do |bookmark| %>
-    <li><%= bookmark %></li>
+<table>
+  <% if @bookmarks.empty? %>
+    <p>No bookmarks have been added yet.</p>
+  <% else %>
+    <% @bookmarks.each do |bookmark| %>
+      <tr>
+        <td><%= bookmark %></td>
+      </tr>
+    <% end %>
   <% end %>
-</ul>
+</table>
