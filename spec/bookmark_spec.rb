@@ -5,6 +5,7 @@ describe Bookmark do
   let(:title) { 'Reddit Homepage' }
   let(:bookmark) { described_class.new(url, title) }
   let(:connection) { PG.connect(dbname: 'bookmarker_test') }
+  let(:bookmark_class) { described_class }
   let(:bookmarks) { described_class.all }
 
   describe '::all' do
@@ -24,10 +25,10 @@ describe Bookmark do
     end
   end
 
-  describe '#initialize' do
-    it 'adds a new bookmark to the bookmark list' do
-      described_class.new('test_url', 'test_title')
-      expect(bookmarks).to include('test_url')
+  describe '::create' do
+    it 'should add a bookmark to the database table' do
+      bookmark_class.create(url, title)
+      expect(bookmarks).to include(url)
     end
   end
 end
