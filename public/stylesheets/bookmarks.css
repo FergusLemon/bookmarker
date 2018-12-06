@@ -1,9 +1,9 @@
-#adding-bookmarks {
+#adding-bookmarks, #editing-bookmarks {
   background-color: #85C1E9;
   padding: 20px 40px;
 }
 
-#enter-url, #enter-title {
+#enter-url, #enter-title, #edit-url, #edit-title {
   font-size: 15px;
   width: 50%;
   display: block;
