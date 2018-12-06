@@ -4,7 +4,13 @@ module CapybaraHelpers
   def should_see(text)
     expect(page).to have_content(text)
   end
+
   def should_not_see(text)
     expect(page).not_to have_content(text)
+  end
+
+  def create_bookmark
+    Bookmark.create('https://github.com', 'Github Homepage')
+    visit '/bookmarks'
   end
 end
