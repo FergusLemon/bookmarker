@@ -14,24 +14,3 @@ body {
   color: #F7F9F9;
   padding-left: 40px;
 }
-
-#adding-bookmarks {
-  background-color: #85C1E9;
-  padding: 20px 40px;
-}
-
-#enter-url, #enter-title {
-  font-size: 15px;
-  width: 50%;
-  display: block;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin: 8px 0;
-}
-
-#add-bookmark {
-  border-radius: 8px;
-  border-color: #138D75;
-  background-color: #138D75;
-  color: #F7F9F9;
-}
