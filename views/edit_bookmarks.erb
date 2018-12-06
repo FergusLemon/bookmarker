@@ -1,0 +1,12 @@
+<div id="editing-bookmarks">
+  <% bookmark = @bookmarks.select { |b| b.id == @id } %>
+  <form action="/bookmarks/<%= bookmark.first.id %>" method="post">
+    <input type="hidden" name="_method" value="PUT"/>
+    <input id="edit-url" type="url" name="url" placeholder="<%= bookmark.first.url %>"
+    alt="Text box to type a URL in"/>
+    <input id="edit-title" type="text" name="title" placeholder="<%= bookmark.first.title %>"
+    alt="Text box to type a title in"/>
+    <input id="update-bookmark" type="submit" name="update-bookmark"
+    value="Update Bookmark" alt="Button to submit an edited bookmark"/>
+  </form>
+</div>
