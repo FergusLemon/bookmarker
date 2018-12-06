@@ -28,7 +28,13 @@
             </button>
           </td>
         </form>
-        <td id="edit"><i class="fas fa-edit"></i></td>
+        <form action="/bookmarks/edit/<%= bookmark.id %>" method="get">
+          <td>
+            <button id="edit-bookmark">
+              <i class="fas fa-edit"></i>
+            </button>
+          </td>
+        </form>
       </tr>
     <% end %>
   <% end %>
