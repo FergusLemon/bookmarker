@@ -16,6 +16,11 @@ attr_reader :id, :url, :title
       connection = choose_database_connection
       connection.exec("DELETE FROM bookmarks WHERE id='#{id}';")
     end
+
+    def update(id, url, title)
+      connection = choose_database_connection
+      connection.exec("UPDATE bookmarks SET url='#{url}', title='#{title}' WHERE id='#{id}';")
+    end
   end
 
   def initialize(**args)
