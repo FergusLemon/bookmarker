@@ -4,6 +4,8 @@ describe Bookmark do
   let(:id) { '1' }
   let(:url) { 'https://reddit.com' }
   let(:title) { 'Reddit Homepage' }
+  let(:new_url) { 'https://google.com' }
+  let(:new_title) { 'Google Homepage' }
   let(:bookmark) { described_class.new(id: id, url: url, title: title) }
   let(:connection) { PG.connect(dbname: 'bookmarker_test') }
   let(:bookmark_class) { described_class }
@@ -34,10 +36,19 @@ describe Bookmark do
   end
 
   describe '::delete' do
-    it 'should delete a bookmark to the database table' do
+    it 'should delete a bookmark from the database table' do
       bookmark_class.create(url, title)
       bookmark_class.delete(id)
       expect(bookmarks).to be_empty
+    end
+  end
+
+  describe '::update' do
+    it 'should update an existing bookmark' do
+      bookmark_class.create(url, title)
+      bookmark_class.update(id, new_url, new_title)
+      expect(bookmarks.first.url).to eq(new_url)
+      expect(bookmarks.first.title).to eq(new_title)
     end
   end
 
