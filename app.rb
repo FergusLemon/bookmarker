@@ -22,4 +22,11 @@ class Bookmarker < Sinatra::Base
     Bookmark.create(url, title)
     redirect '/bookmarks'
   end
+
+  post '/bookmarks/delete' do
+    id = params['id']
+    p id
+    Bookmark.delete(id)
+    redirect 'bookmarks'
+  end
 end
