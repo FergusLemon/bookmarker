@@ -3,6 +3,10 @@ require File.join(File.dirname(__FILE__), 'lib', 'bookmark')
 
 class Bookmarker < Sinatra::Base
 
+  configure do
+    enable :method_override
+  end
+
   before do
     @bookmarks = Bookmark.all
   end
@@ -17,16 +21,12 @@ class Bookmarker < Sinatra::Base
   end
 
   post '/bookmarks' do
-    url = params['url']
-    title = params['title']
-    Bookmark.create(url, title)
+    Bookmark.create(params['url'], params['title'])
     redirect '/bookmarks'
   end
 
-  post '/bookmarks/delete' do
-    id = params['id']
-    p id
-    Bookmark.delete(id)
+  delete '/bookmarks/:id' do
+    Bookmark.delete(params['id'])
     redirect 'bookmarks'
   end
 end

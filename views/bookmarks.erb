@@ -20,9 +20,9 @@
             <%= bookmark.title %>
           </a>
         </td>
-        <form action="/bookmarks/delete" method="post">
-          <td id="delete">
-            <input type="hidden" name="id" value="<%= bookmark.id %>"/>
+        <form action="/bookmarks/<%= bookmark.id %>" method="post">
+          <td>
+            <input type="hidden" name="_method" value="DELETE"/>
             <button id="delete-bookmark">
               <i class="far fa-trash-alt"></i>
             </button>
