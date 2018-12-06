@@ -33,6 +33,14 @@ describe Bookmark do
     end
   end
 
+  describe '::delete' do
+    it 'should delete a bookmark to the database table' do
+      bookmark_class.create(url, title)
+      bookmark_class.delete(id)
+      expect(bookmarks).to be_empty
+    end
+  end
+
   describe '#id' do
     it 'should return the id of the bookmark' do
       expect(bookmark.id).to eq(id)
