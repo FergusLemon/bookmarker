@@ -5,6 +5,10 @@ class DatabaseConnection
        @@database_connection = PG.connect(dbname: database)
     end
 
+    def query(query_string)
+      @@database_connection.exec(query_string)
+    end
+
     def database_connection
       @@database_connection
     end
