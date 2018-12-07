@@ -1,4 +1,5 @@
 require 'pg'
+require_relative 'database_connection'
 class Bookmark
 attr_reader :id, :url, :title
 
@@ -8,18 +9,15 @@ attr_reader :id, :url, :title
     end
 
     def create(url, title)
-      connection = choose_database_connection
-      connection.exec("INSERT INTO bookmarks(url, title) VALUES('#{url}', '#{title}');")
+      DatabaseConnection.query("INSERT INTO bookmarks(url, title) VALUES('#{url}', '#{title}');")
     end
 
     def delete(id)
-      connection = choose_database_connection
-      connection.exec("DELETE FROM bookmarks WHERE id='#{id}';")
+      DatabaseConnection.query("DELETE FROM bookmarks WHERE id='#{id}';")
     end
 
     def update(id, url, title)
-      connection = choose_database_connection
-      connection.exec("UPDATE bookmarks SET url='#{url}', title='#{title}' WHERE id='#{id}';")
+      DatabaseConnection.query("UPDATE bookmarks SET url='#{url}', title='#{title}' WHERE id='#{id}';")
     end
   end
 
@@ -32,17 +30,8 @@ attr_reader :id, :url, :title
   private
 
   class << self
-    def choose_database_connection
-      if ENV['RACK_ENV'] == 'test'
-        PG.connect(dbname: 'bookmarker_test')
-      else
-        PG.connect(dbname: 'bookmarker')
-      end
-    end
-
     def retrieve_bookmarks
-      connection = choose_database_connection
-      bookmarks_data = connection.exec('SELECT * FROM bookmarks')
+      bookmarks_data = DatabaseConnection.query('SELECT * FROM bookmarks')
       wrap_database_results(bookmarks_data)
     end
 
