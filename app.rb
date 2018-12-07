@@ -31,7 +31,7 @@ class Bookmarker < Sinatra::Base
     redirect '/bookmarks'
   end
 
-  get '/bookmarks/edit/:id' do
+  get '/bookmarks/:id/edit' do
     @id = params['id']
     erb :edit_bookmarks
   end
