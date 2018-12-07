@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require File.join(File.dirname(__FILE__), 'lib', 'bookmark')
-require File.join(File.dirname(__FILE__), 'lib', 'database_connection')
+require File.join(File.dirname(__FILE__), 'lib', 'database_connection_setup')
 
 class Bookmarker < Sinatra::Base
 
