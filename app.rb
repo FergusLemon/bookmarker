@@ -42,7 +42,7 @@ class Bookmarker < Sinatra::Base
     redirect '/bookmarks'
   end
 
-  get '/bookmarks/:id/add-comment' do
+  get '/bookmarks/:id/comments/new' do
     @bookmark_id = params['id']
     erb :add_comments
   end
@@ -52,8 +52,8 @@ class Bookmarker < Sinatra::Base
     redirect '/bookmarks'
   end
 
-  get 'bookmarks/:id/comments' do
-    @comments = Bookmark.get_comments(params[:id])
+  get '/bookmarks/:id/comments' do
+    @comments = Bookmark.comments(params[:id])
     erb :view_comments
   end
 end
