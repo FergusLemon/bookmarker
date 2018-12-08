@@ -23,15 +23,29 @@
         <form action="/bookmarks/<%= bookmark.id %>" method="post">
           <td>
             <input type="hidden" name="_method" value="DELETE"/>
-            <button id="delete-bookmark">
+            <button id="delete-bookmark" title="Delete Bookmark">
               <i class="far fa-trash-alt"></i>
             </button>
           </td>
         </form>
         <form action="/bookmarks/<%= bookmark.id %>/edit" method="get">
           <td>
-            <button id="edit-bookmark">
+            <button id="edit-bookmark" title="Edit Bookmark">
               <i class="fas fa-edit"></i>
+            </button>
+          </td>
+        </form>
+        <form action="/bookmarks/<%= bookmark.id %>/add-comment" method="get">
+          <td>
+            <button id="add-comment" title="Add a Comment">
+              <i class="fas fa-comment"></i>
+            </button>
+          </td>
+        </form>
+        <form action="/bookmarks/<%= bookmark.id %>/comments" method="get">
+          <td>
+            <button id="comments" title="View Comments">
+              <i class="fas fa-eye"></i>
             </button>
           </td>
         </form>
