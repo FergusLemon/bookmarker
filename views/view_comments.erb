@@ -1,0 +1,8 @@
+<ul>
+  <% if @comments.empty? %>
+    <p>This bookmark has not had any comments yet.</p>
+  <% else %>
+    <% @comments.each do |c| %>
+      <li><%= c.text %></li>
+    <% end %>
+</ul>
