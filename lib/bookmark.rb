@@ -8,6 +8,10 @@ attr_reader :id, :url, :title
       retrieve_bookmarks
     end
 
+    def comments(id)
+      retrieve_comments(id)
+    end
+
     def create(url, title)
       DatabaseConnection.query("INSERT INTO bookmarks(url, title) VALUES('#{url}', '#{title}');")
     end
@@ -33,6 +37,10 @@ attr_reader :id, :url, :title
     def retrieve_bookmarks
       bookmarks_data = DatabaseConnection.query('SELECT * FROM bookmarks')
       wrap_database_results(bookmarks_data)
+    end
+
+    def retrieve_comments(id)
+      DatabaseConnection.query("SELECT * FROM comments WHERE bookmark_id='#{id}';")
     end
 
     def wrap_database_results(bookmarks_data)
