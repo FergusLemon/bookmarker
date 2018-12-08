@@ -28,6 +28,16 @@ describe Bookmark do
     end
   end
 
+  describe '::comments' do
+    it 'returns all comments made on a bookmark' do
+      bookmark_class.create(url, title)
+      id = bookmarks.last.id
+      DatabaseConnection.query("INSERT INTO comments(text, bookmark_id) VALUES('Test Comment', '#{id}');")
+      DatabaseConnection.query("SELECT * FROM comments WHERE(bookmark_id='#{id}');")
+      expect(bookmark_class.comments(id).to_a.last['text']).to eq('Test Comment')
+    end
+  end
+
   describe '::create' do
     it 'should add a bookmark to the database table' do
       bookmark_class.create(url, title)
