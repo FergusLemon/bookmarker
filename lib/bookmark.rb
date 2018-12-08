@@ -8,8 +8,8 @@ attr_reader :id, :url, :title
       retrieve_bookmarks
     end
 
-    def comments(id)
-      retrieve_comments(id)
+    def comments(comment_class = Comment, id)
+      retrieve_comments(comment_class, id)
     end
 
     def create(url, title)
@@ -39,8 +39,8 @@ attr_reader :id, :url, :title
       wrap_database_results(bookmarks_data)
     end
 
-    def retrieve_comments(id)
-      DatabaseConnection.query("SELECT * FROM comments WHERE bookmark_id='#{id}';")
+    def retrieve_comments(comment_class, id)
+      comment_class.where(bookmark_id: id)
     end
 
     def wrap_database_results(bookmarks_data)
