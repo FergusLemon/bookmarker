@@ -10,6 +10,7 @@ describe Bookmark do
   let(:connection) { PG.connect(dbname: 'bookmarker_test') }
   let(:bookmark_class) { described_class }
   let(:bookmarks) { described_class.all }
+  let(:comment_class) { double('Comment Class') }
 
   describe '::all' do
     context 'when no bookmarks have been added' do
@@ -32,9 +33,8 @@ describe Bookmark do
     it 'returns all comments made on a bookmark' do
       bookmark_class.create(url, title)
       id = bookmarks.last.id
-      DatabaseConnection.query("INSERT INTO comments(text, bookmark_id) VALUES('Test Comment', '#{id}');")
-      DatabaseConnection.query("SELECT * FROM comments WHERE(bookmark_id='#{id}');")
-      expect(bookmark_class.comments(id).to_a.last['text']).to eq('Test Comment')
+      expect(comment_class).to receive(:where).with(bookmark_id: id)
+      bookmark_class.comments(comment_class, id)
     end
   end
 
