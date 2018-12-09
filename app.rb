@@ -48,12 +48,12 @@ class Bookmarker < Sinatra::Base
   end
 
   post '/bookmarks/:id' do
-    Comment.create(params['bookmark_id'], params['comment'])
+    Comment.create(params['comment'], params['id'])
     redirect '/bookmarks'
   end
 
   get '/bookmarks/:id/comments' do
-    @comments = Bookmark.comments(params[:id])
+    @comments = Comment.where(params[:id])
     erb :view_comments
   end
 end
