@@ -11,6 +11,7 @@ describe Bookmark do
   let(:bookmark_class) { described_class }
   let(:bookmarks) { described_class.all }
   let(:comment_class) { double('Comment Class') }
+  let(:tag_class) { double('Tag Class') }
 
   describe '::all' do
     context 'when no bookmarks have been added' do
@@ -36,6 +37,15 @@ describe Bookmark do
       id = bookmarks.last.id
       expect(comment_class).to receive(:where).with(bookmark_id: id)
       bookmark_class.comments(comment_class, id)
+    end
+  end
+
+  describe '::tags' do
+    it 'returns all tags added to a bookmark' do
+      bookmark_class.create(url, title)
+      id = bookmarks.last.id
+      expect(tag_class).to receive(:where).with(bookmark_id: id)
+      bookmark_class.tags(tag_class, id)
     end
   end
 
