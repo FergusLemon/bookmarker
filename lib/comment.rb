@@ -27,7 +27,9 @@ attr_reader :id, :text, :bookmark_id
   class << self
     def wrap_database_results(table_data)
       table_data.map do |row|
-        self.new(id: row['id'], text: row['text'], bookmark_id: row['bookmark_id'])
+        self.new(id: row['id'],\
+                 text: row['text'],\
+                 bookmark_id: row['bookmark_id'])
       end
     end
   end

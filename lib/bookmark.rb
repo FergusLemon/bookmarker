@@ -13,7 +13,8 @@ attr_reader :id, :url, :title
     end
 
     def create(url, title)
-      DatabaseConnection.query("INSERT INTO bookmarks(url, title) VALUES('#{url}', '#{title}');")
+      DatabaseConnection.query("INSERT INTO bookmarks(url, title)\
+                               VALUES('#{url}', '#{title}');")
     end
 
     def delete(id)
@@ -21,7 +22,8 @@ attr_reader :id, :url, :title
     end
 
     def update(id, url, title)
-      DatabaseConnection.query("UPDATE bookmarks SET url='#{url}', title='#{title}' WHERE id='#{id}';")
+      DatabaseConnection.query("UPDATE bookmarks SET url='#{url}',\
+                               title='#{title}' WHERE id='#{id}';")
     end
   end
 
@@ -45,7 +47,9 @@ attr_reader :id, :url, :title
 
     def wrap_database_results(bookmarks_data)
       bookmarks_data.map do |bookmark|
-        self.new(id: bookmark['id'], url: bookmark['url'], title: bookmark['title'])
+        self.new(id: bookmark['id'],\
+                 url: bookmark['url'],\
+                 title: bookmark['title'])
       end
     end
   end
