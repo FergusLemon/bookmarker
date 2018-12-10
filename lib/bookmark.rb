@@ -12,6 +12,10 @@ attr_reader :id, :url, :title
       retrieve_comments(comment_class, id)
     end
 
+    def tags(tag_class = Tag, id)
+      retrieve_tags(tag_class, id)
+    end
+
     def create(url, title)
       DatabaseConnection.query("INSERT INTO bookmarks(url, title)\
                                VALUES('#{url}', '#{title}');")
@@ -43,6 +47,10 @@ attr_reader :id, :url, :title
 
     def retrieve_comments(comment_class, id)
       comment_class.where(bookmark_id: id)
+    end
+
+    def retrieve_tags(tag_class, id)
+      tag_class.where(bookmark_id: id)
     end
 
     def wrap_database_results(bookmarks_data)
