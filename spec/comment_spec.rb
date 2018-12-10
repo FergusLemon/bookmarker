@@ -24,10 +24,9 @@ describe Comment do
     it 'returns all comments made on a bookmark' do
       Bookmark.create(url, title)
       bookmark_id = Bookmark.all.to_a.last.id
-      test_comment = comment_class.create(text, bookmark_id)
-      another_test_comment = comment_class.create(more_text, bookmark_id)
+      comment_class.create(text, bookmark_id)
+      comment_class.create(more_text, bookmark_id)
       comments = comment_class.where(bookmark_id)
-      expect(comments).not_to be_empty
       expect(comments.size).to eq(2)
       expect(comments.first.text).to eq(text)
       expect(comments.last.text).to eq(more_text)

@@ -23,7 +23,8 @@ describe Bookmark do
     end
     context 'when one bookmark has been added' do
       it 'should include the bookmark' do
-        connection.exec("INSERT INTO bookmarks(url, title) VALUES('https://reddit.com', 'Reddit Homepage');")
+        connection.exec("INSERT INTO bookmarks(url, title)\
+                        VALUES('https://reddit.com', 'Reddit Homepage');")
         expect(bookmarks.last.url).to eq(bookmark.url)
       end
     end
