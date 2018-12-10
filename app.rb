@@ -56,4 +56,14 @@ class Bookmarker < Sinatra::Base
     @comments = Comment.where(params[:id])
     erb :view_comments
   end
+
+  get '/bookmarks/:id/tags/new' do
+    @bookmark_id = params['id']
+    erb :add_tags
+  end
+
+  get '/bookmarks/:id/tags' do
+    @tag = 'This is a test tag'
+    erb :view_tags
+  end
 end
