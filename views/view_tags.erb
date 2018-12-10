@@ -1,5 +1,11 @@
 <ul>
-  <li><%= @tag %></li>
+  <% if @tags.empty? %>
+    <p>No tags have been added to this bookmark yet.</p>
+  <% else %>
+    <% @tags.each do |t| %>
+      <li><%= t.content %></li>
+    <% end %>
+  <% end %>
 </ul>
   <form action="/bookmarks" method="get">
     <input id="view-bookmarks" type="submit" name="view-bookmarks"
