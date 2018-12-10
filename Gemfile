@@ -9,8 +9,6 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'coveralls'
-  gem 'factory_bot'
   gem 'rake'
   gem 'rspec'
   gem 'rubocop'
