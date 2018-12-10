@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require File.join(File.dirname(__FILE__), 'lib', 'bookmark')
 require File.join(File.dirname(__FILE__), 'lib', 'comment')
+require File.join(File.dirname(__FILE__), 'lib', 'tag')
 require File.join(File.dirname(__FILE__), 'lib', 'database_connection_setup')
 
 class Bookmarker < Sinatra::Base
@@ -47,7 +48,7 @@ class Bookmarker < Sinatra::Base
     erb :add_comments
   end
 
-  post '/bookmarks/:id' do
+  post '/bookmarks/:id/comment' do
     Comment.create(params['comment'], params['id'])
     redirect '/bookmarks'
   end
@@ -62,8 +63,13 @@ class Bookmarker < Sinatra::Base
     erb :add_tags
   end
 
+  post '/bookmarks/:id/tag' do
+    Tag.create(params['content'], params['id'])
+    redirect '/bookmarks'
+  end
+
   get '/bookmarks/:id/tags' do
-    @tag = 'This is a test tag'
+    @tags = Tag.where(params[:id])
     erb :view_tags
   end
 end
