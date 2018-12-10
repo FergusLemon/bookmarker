@@ -6,6 +6,8 @@ attr_reader :id, :content
       result = DatabaseConnection.query("INSERT INTO tags(content)\
                                         VALUES('#{content}')\
                                         RETURNING id, content;")
+      DatabaseConnection.query("INSERT INTO bookmark_tags(bookmark_id, tag_id)\
+                               VALUES('#{bookmark_id}', '#{result[0]['id']}');")
       wrap_database_results(result).pop
     end
   end
