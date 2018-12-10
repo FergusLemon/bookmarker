@@ -49,6 +49,20 @@
             </button>
           </td>
         </form>
+        <form action="/bookmarks/<%= bookmark.id %>/tags/new" method="get">
+          <td>
+            <button id="add-tag" title="Add a Tag">
+              <i class="fas fa-tag"></i>
+            </button>
+          </td>
+        </form>
+        <form action="/bookmarks/<%= bookmark.id %>/tags" method="get">
+          <td>
+            <button id="tags" title="View Tags">
+              <i class="fas fa-tags"></i>
+            </button>
+          </td>
+        </form>
       </tr>
     <% end %>
   <% end %>
