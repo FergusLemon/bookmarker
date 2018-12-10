@@ -13,4 +13,10 @@ module CapybaraHelpers
     Bookmark.create('https://github.com', 'Github Homepage')
     visit '/bookmarks'
   end
+
+  def create_comment(comment)
+    click_on 'add-comment'
+    fill_in('comment', :with => comment)
+    click_on 'submit-comment'
+  end
 end
