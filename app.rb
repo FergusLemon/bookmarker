@@ -64,12 +64,19 @@ class Bookmarker < Sinatra::Base
   end
 
   post '/bookmarks/:id/tag' do
-    Tag.create(params['content'], params['id'])
+    tag = Tag.create(params['content'], params['id'])
+    tag_id = tag.to_a.first.id
+    BookmarkTag.create(params['id'], tag_id)
     redirect '/bookmarks'
   end
 
   get '/bookmarks/:id/tags' do
     @tags = Tag.where(params[:id])
     erb :view_tags
+  end
+
+  get '/tags/:id/bookmarks' do
+    @bookmarks = Bookmark.where(params['id'])
+    erb :view_bookmarks
   end
 end
