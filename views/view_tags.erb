@@ -1,12 +1,21 @@
-<ul>
+<table id="tags">
   <% if @tags.empty? %>
     <p>No tags have been added to this bookmark yet.</p>
   <% else %>
     <% @tags.each do |t| %>
-      <li><%= t.content %></li>
+      <tr>
+        <td><%= t.content %></td>
+        <form action="/tags/<%= t.id %>/bookmarks" method="get">
+          <td>
+            <button id="bookmarks" title="View Bookmarks">
+              <i class="far fa-trash-alt"></i>
+            </button>
+          </td>
+        </form>
+      </tr>
     <% end %>
   <% end %>
-</ul>
+</table>
   <form action="/bookmarks" method="get">
     <input id="view-bookmarks" type="submit" name="view-bookmarks"
     value="View Bookmarks" alt="Button to return to the bookmarks page."/>
