@@ -6,12 +6,14 @@ describe Bookmark do
   let(:title) { 'Reddit Homepage' }
   let(:new_url) { 'https://google.com' }
   let(:new_title) { 'Google Homepage' }
+  let(:other_title) { 'Github Homepage' }
   let(:bookmark) { described_class.new(id: id, url: url, title: title) }
   let(:connection) { PG.connect(dbname: 'bookmarker_test') }
   let(:bookmark_class) { described_class }
   let(:bookmarks) { described_class.all }
   let(:comment_class) { double('Comment Class') }
   let(:tag_class) { double('Tag Class') }
+  let(:tag_id) { 1 }
 
   describe '::all' do
     context 'when no bookmarks have been added' do
@@ -46,6 +48,16 @@ describe Bookmark do
       id = bookmarks.last.id
       expect(tag_class).to receive(:where).with(bookmark_id: id)
       bookmark_class.tags(tag_class, id)
+    end
+  end
+
+  describe '::where' do
+    it 'returns all bookmarks associated with a tag' do
+      bookmark_class.create(url, other_title)
+      result = bookmark_class.where(tag_id)
+      expect(result.length).to eq(2)
+      expect(result.first.title).to eq(title)
+      expect(result.last.title).to eq(other_title)
     end
   end
 
