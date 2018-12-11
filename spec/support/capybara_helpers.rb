@@ -9,8 +9,8 @@ module CapybaraHelpers
     expect(page).not_to have_content(text)
   end
 
-  def create_bookmark
-    Bookmark.create('https://github.com', 'Github Homepage')
+  def create_bookmark(url, title)
+    Bookmark.create(url, title)
     visit '/bookmarks'
   end
 
@@ -18,5 +18,10 @@ module CapybaraHelpers
     click_on 'add-comment'
     fill_in('comment', :with => comment)
     click_on 'submit-comment'
+  end
+
+  def create_tag(content, bookmark_id)
+    Tag.create(content, bookmark_id)
+    visit '/bookmarks'
   end
 end
