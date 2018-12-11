@@ -1,0 +1,13 @@
+<ul>
+  <% @bookmarks.each do |bookmark| %>
+    <li>
+      <a href=<%= bookmark.url %> title=<%= bookmark.url %> target="_blank">
+        <%= bookmark.title %>
+      </a>
+    </li>
+  <% end %>
+</ul>
+  <form action="/bookmarks" method="get">
+    <input id="homepage" type="submit" name="homepage"
+    value="Back to Homepage" alt="Button to return to the bookmarks page."/>
+  </form>
