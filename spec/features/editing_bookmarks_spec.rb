@@ -1,6 +1,6 @@
 feature 'Editing bookmarks' do
   scenario 'User can edit an existing bookmark' do
-    create_bookmark
+    create_bookmark('https://github.com', 'Github Homepage')
     click_button 'edit-bookmark'
     fill_in('url', :with => 'https://reddit.com')
     fill_in('title', :with => 'Reddit Homepage')
