@@ -30,9 +30,9 @@ describe Tag do
     end
     context 'where a tag already exists' do
       it 'does not add a duplicate tag to the tags table' do
-        expect { tag }.not_to change { tags.to_a.length }
+        expect { tag }.not_to change { tag_class.all.length }
         expect { tag_class.create(content, another_bookmark_id) }.not_to change\
-          { tags.to_a.length }
+          { tag_class.all.length }
       end
     end
   end
