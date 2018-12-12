@@ -21,7 +21,9 @@ module CapybaraHelpers
   end
 
   def create_tag(content, bookmark_id)
-    Tag.create(content, bookmark_id)
+    tag = Tag.create(content, bookmark_id)
+    tag_id = tag.id
+    BookmarkTag.create(bookmark_id: bookmark_id, tag_id: tag_id)
     visit '/bookmarks'
   end
 end
