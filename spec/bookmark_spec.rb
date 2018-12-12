@@ -6,7 +6,8 @@ describe Bookmark do
   let(:title) { 'Reddit Homepage' }
   let(:new_url) { 'https://google.com' }
   let(:new_title) { 'Google Homepage' }
-  let(:other_title) { 'Github Homepage' }
+  let(:another_url) { 'https:://github.com' }
+  let(:another_title) { 'Github Homepage' }
   let(:bookmark) { described_class.new(id: id, url: url, title: title) }
   let(:connection) { PG.connect(dbname: 'bookmarker_test') }
   let(:bookmark_class) { described_class }
@@ -53,11 +54,18 @@ describe Bookmark do
 
   describe '::where' do
     it 'returns all bookmarks associated with a tag' do
-      bookmark_class.create(url, other_title)
-      result = bookmark_class.where(tag_id)
+      bookmark = bookmark_class.create(url, title)
+      tag1 = Tag.create('Test1', bookmark.id)
+      BookmarkTag.create(bookmark_id: bookmark.id, tag_id: tag1.id)
+      tag2 = Tag.create('Test2', bookmark.id)
+      BookmarkTag.create(bookmark_id: bookmark.id, tag_id: tag2.id)
+      another_bookmark = bookmark_class.create(another_url, another_title)
+      tag3 = Tag.create('Test1', another_bookmark.id)
+      BookmarkTag.create(bookmark_id: another_bookmark.id, tag_id: tag3.id)
+      result = bookmark_class.where(tag1.id)
       expect(result.length).to eq(2)
       expect(result.first.title).to eq(title)
-      expect(result.last.title).to eq(other_title)
+      expect(result.last.title).to eq(another_title)
     end
   end
 

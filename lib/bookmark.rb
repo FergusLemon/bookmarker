@@ -16,9 +16,19 @@ attr_reader :id, :url, :title
       retrieve_tags(tag_class, id)
     end
 
+    def where(tag_id)
+      result = DatabaseConnection.query("SELECT bookmarks.id, url, title FROM\
+                                        bookmarks INNER JOIN bookmark_tags ON\
+                                        bookmarks.id = bookmark_tags.bookmark_id\
+                                        WHERE bookmark_tags.tag_id = #{tag_id};")
+      wrap_database_results(result)
+    end
+
     def create(url, title)
-      DatabaseConnection.query("INSERT INTO bookmarks(url, title)\
-                               VALUES('#{url}', '#{title}');")
+       result = DatabaseConnection.query("INSERT INTO bookmarks(url, title)\
+                                         VALUES('#{url}', '#{title}')\
+                                         RETURNING id, url, title;")
+       wrap_database_results(result).pop
     end
 
     def delete(id)
