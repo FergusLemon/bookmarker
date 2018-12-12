@@ -2,6 +2,7 @@ require 'sinatra/base'
 require File.join(File.dirname(__FILE__), 'lib', 'bookmark')
 require File.join(File.dirname(__FILE__), 'lib', 'comment')
 require File.join(File.dirname(__FILE__), 'lib', 'tag')
+require File.join(File.dirname(__FILE__), 'lib', 'bookmark_tag')
 require File.join(File.dirname(__FILE__), 'lib', 'database_connection_setup')
 
 class Bookmarker < Sinatra::Base
@@ -65,8 +66,8 @@ class Bookmarker < Sinatra::Base
 
   post '/bookmarks/:id/tag' do
     tag = Tag.create(params['content'], params['id'])
-    tag_id = tag.to_a.first.id
-    BookmarkTag.create(params['id'], tag_id)
+    tag_id = tag.id
+    BookmarkTag.create(bookmark_id: params['id'], tag_id: tag_id)
     redirect '/bookmarks'
   end
 
