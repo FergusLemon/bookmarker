@@ -2,7 +2,7 @@ require 'bookmark_tag'
 
 describe BookmarkTag do
   let(:bookmark_tag_class) { described_class }
-  let(:bookmark_tags) {described_class.all}
+  let(:bookmark_tags) { described_class.all }
 
   describe '::create' do
     it 'adds an entry in the bookmark_tags join table' do
