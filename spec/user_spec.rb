@@ -1,10 +1,10 @@
 require 'user'
 
 describe User do
-let(:username) { 'TestUser' }
-let(:password) { 'Te$tPa$$word' }
-let(:connection) { PG.connect(dbname: 'bookmarker_test') }
-let(:users) { User.all }
+  let(:username) { 'test_user@gmail.com' }
+  let(:password) { 'Te$tPa$$word' }
+  let(:connection) { PG.connect(dbname: 'bookmarker_test') }
+  let(:users) { User.all }
 
   describe '::all' do
     context 'when no users have been registered' do
@@ -25,6 +25,18 @@ let(:users) { User.all }
       User.create(username: username, password: password)
       expect(users).not_to be_empty
       expect(users.length).to eq(1)
+    end
+    it "it hashes a user's password" do
+      expect(BCrypt::Password).to receive(:create).with(password)
+      User.create(username: username, password: password)
+    end
+  end
+
+  describe '::find' do
+    it 'searches a db for a user based on a user ID' do
+      user = User.create(username: username, password: password)
+      returned_user = User.find(user_id: user.id)
+      expect(returned_user.username).to eq(username)
     end
   end
 end

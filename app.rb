@@ -22,6 +22,10 @@ class Bookmarker < Sinatra::Base
     erb :index
   end
 
+  get '/users/new' do
+    erb :users_new
+  end
+
   post '/users' do
     user = User.create(username: params['username'], password: params['password'])
     session[:user_id] = user.id

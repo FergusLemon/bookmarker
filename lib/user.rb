@@ -1,7 +1,8 @@
 require 'pg'
 require_relative 'database_connection'
+require 'bcrypt'
 class User
-attr_reader :id, :username
+  attr_reader :id, :username
 
   class << self
     def all
@@ -9,10 +10,16 @@ attr_reader :id, :username
     end
 
     def create(username:, password:)
-      hashed_password = password
+      hashed_password = BCrypt::Password.create(password)
       result = DatabaseConnection.query("INSERT INTO users(username, password)\
                                        VALUES('#{username}', '#{hashed_password}')\
                                        RETURNING id, username;")
+      wrap_database_results(result).pop
+    end
+
+    def find(user_id:)
+      result = DatabaseConnection.query("SELECT id, username FROM users WHERE\
+                                        id = '#{user_id}';")
       wrap_database_results(result).pop
     end
   end

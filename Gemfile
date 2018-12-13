@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.5.1'
 
 group :development, :test do
+  gem 'bcrypt'
   gem 'pg'
   gem 'sinatra'
   gem 'selenium-webdriver'
