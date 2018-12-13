@@ -3,12 +3,15 @@ require File.join(File.dirname(__FILE__), 'lib', 'bookmark')
 require File.join(File.dirname(__FILE__), 'lib', 'comment')
 require File.join(File.dirname(__FILE__), 'lib', 'tag')
 require File.join(File.dirname(__FILE__), 'lib', 'bookmark_tag')
+require File.join(File.dirname(__FILE__), 'lib', 'user')
 require File.join(File.dirname(__FILE__), 'lib', 'database_connection_setup')
 
 class Bookmarker < Sinatra::Base
 
   configure do
     enable :method_override
+    enable :sessions
+    set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
   end
 
   before do
@@ -17,6 +20,11 @@ class Bookmarker < Sinatra::Base
 
   get '/' do
     erb :index
+  end
+
+  post '/users' do
+    user = User.create(username: params['username'], password: params['password'])
+    session[:user_id] = user.id
     redirect '/bookmarks'
   end
 

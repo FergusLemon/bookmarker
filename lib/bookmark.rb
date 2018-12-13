@@ -51,7 +51,7 @@ attr_reader :id, :url, :title
 
   class << self
     def retrieve_bookmarks
-      bookmarks_data = DatabaseConnection.query('SELECT * FROM bookmarks')
+      bookmarks_data = DatabaseConnection.query('SELECT * FROM bookmarks;')
       wrap_database_results(bookmarks_data)
     end
 
