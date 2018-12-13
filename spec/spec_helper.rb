@@ -16,11 +16,12 @@
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
-require 'factory_bot'
 require 'pg'
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 require File.join(File.dirname(__FILE__), '.', 'support', 'capybara_helpers.rb')
-require File.join(File.dirname(__FILE__), '.', 'support', 'setup_test_database.rb')
+require 'rake'
+
+Rake.application.load_rakefile
 
 ENV['RACK_ENV'] ||= 'test'
 
@@ -35,14 +36,8 @@ RSpec.configure do |config|
   # assertions if you prefer.
   config.include CapybaraHelpers, type: :feature
 
-  config.include FactoryBot::Syntax::Methods
-  config.before(:suite) do
-    FactoryBot.find_definitions
-  end
-
-  config.include DatabaseHelpers
   config.before(:each) do
-    truncate_table
+    Rake::Task['test_database_setup'].execute
   end
 
   config.expect_with :rspec do |expectations|
