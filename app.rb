@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'sinatra/flash'
 require File.join(File.dirname(__FILE__), 'lib', 'bookmark')
 require File.join(File.dirname(__FILE__), 'lib', 'comment')
 require File.join(File.dirname(__FILE__), 'lib', 'tag')
@@ -12,6 +13,7 @@ class Bookmarker < Sinatra::Base
     enable :method_override
     enable :sessions
     set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
+    register Sinatra::Flash
   end
 
   before do
@@ -26,6 +28,21 @@ class Bookmarker < Sinatra::Base
     erb :users_new
   end
 
+  get '/sessions/new' do
+    erb :"sessions/new"
+  end
+
+  post '/sessions' do
+    user = User.authenticate(username: params['username'], password: params['password'])
+    if user == nil
+      flash[:sign_in_error] = "The username or password entered were incorrect, please try again."
+      redirect '/sessions/new'
+    else
+      session[:user_id] = user.id
+      redirect '/bookmarks'
+    end
+  end
+
   post '/users' do
     user = User.create(username: params['username'], password: params['password'])
     session[:user_id] = user.id
@@ -33,6 +50,7 @@ class Bookmarker < Sinatra::Base
   end
 
   get '/bookmarks' do
+    @user = User.find(user_id: session[:user_id])
     erb :bookmarks
   end
 

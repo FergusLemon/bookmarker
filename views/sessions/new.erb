@@ -1,0 +1,11 @@
+<h2>
+  <%= flash[:sign_in_error] %>
+</h2>
+<form action="/sessions" method="post">
+    <input id="enter-username" type="email" name="username" placeholder="Enter your email address"
+    alt="Text box to type a username in"/>
+    <input id="enter-password" type="password" name="password" placeholder="Enter your password"
+    alt="Text box to type a password in"/>
+    <input id="sign-in-user" type="submit" name="sign-in-user"
+    value="Submit" alt="Button to sign in an existing user"/>
+</form>

@@ -32,11 +32,29 @@ describe User do
     end
   end
 
+  describe '::authenticate' do
+    it 'checks to see if the username provided matches that of an existing user' do
+      User.create(username: username, password: password)
+      user = User.authenticate(username: username, password: password)
+      expect(user.username).to eq(username)
+    end
+    it 'returns nil if the username does not exist in the database' do
+      expect(User.authenticate(username: username, password: password)).to eq nil
+    end
+    it 'returns nil if the username exists but the password is incorrect' do
+      User.create(username: username, password: password)
+      expect(User.authenticate(username: username, password: 'random')).to eq nil
+    end
+  end
+
   describe '::find' do
     it 'searches a db for a user based on a user ID' do
       user = User.create(username: username, password: password)
       returned_user = User.find(user_id: user.id)
       expect(returned_user.username).to eq(username)
+    end
+    it 'returns nil if there is no user_id stored in a session' do
+      expect(User.find(user_id: nil)).to eq(nil)
     end
   end
 end

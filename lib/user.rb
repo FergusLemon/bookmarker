@@ -18,8 +18,21 @@ class User
     end
 
     def find(user_id:)
+      return nil unless user_id
       result = DatabaseConnection.query("SELECT id, username FROM users WHERE\
                                         id = '#{user_id}';")
+      wrap_database_results(result).pop
+    end
+
+    def authenticate(username:, password:)
+      result = DatabaseConnection.query("SELECT id, username FROM users WHERE\
+                                        username = '#{username}';")
+      return nil unless result.any?
+      user_data = DatabaseConnection.query("SELECT password FROM users WHERE\
+                                          username = '#{username}';").to_a
+      stored_hash = user_data.first['password']
+      decrypted_password = BCrypt::Password.new(stored_hash)
+      return nil unless decrypted_password == password
       wrap_database_results(result).pop
     end
   end

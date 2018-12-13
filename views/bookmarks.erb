@@ -9,6 +9,9 @@
   </form>
 </div>
 <br/>
+  <% if @user %>
+    <h3><%= "Logged in as #{@user.username}" %></h3>
+  <% end %>
 <table id="bookmark-table">
   <% if @bookmarks.empty? %>
     <p>No bookmarks have been added yet.</p>
