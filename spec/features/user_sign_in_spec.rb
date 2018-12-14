@@ -2,7 +2,7 @@ feature 'User sign in' do
   scenario 'An existing user can sign in' do
     User.create(username: 'test@gmail.com', password: 'myPa$$word')
     visit '/'
-    click_on 'Sign in'
+    click_on 'Sign In'
     fill_in 'username', with: 'test@gmail.com'
     fill_in 'password', with: 'myPa$$word'
     click_on 'Submit'
@@ -11,7 +11,7 @@ feature 'User sign in' do
   scenario 'If the wrong username or password is provided an error message is shown' do
     User.create(username: 'test@gmail.com', password: 'myPa$$word')
     visit '/'
-    click_on 'Sign in'
+    click_on 'Sign In'
     fill_in 'username', with: 'test11@gmail.com'
     fill_in 'password', with: 'myPa$$word'
     click_on 'Submit'

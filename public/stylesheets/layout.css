@@ -13,4 +13,57 @@ body {
   margin: 0;
   color: #F7F9F9;
   padding-left: 40px;
+  position: relative;
+}
+
+#sign-up, #sign-in, #sign-out, #create-user, #sign-in-user {
+  font-size: 25px;
+  margin: 10px;
+  border-radius: 8px;
+  border-color: #138D75;
+  background-color: #3498DB;
+  color: #F7F9F9;
+  width: 120px;
+}
+
+#sign-up, #sign-in, #sign-out {
+  font-weight: bold;
+  background-color: #F7F9F9;
+  color: #3498DB;
+  position: absolute;
+  top: 35px;
+}
+
+#sign-up {
+  right: 350px;
+}
+
+#sign-in, #sign-out {
+  right: 200px;
+}
+
+fieldset {
+  width: 500px;
+  border: 1px solid #3498DB;
+  border-radius: 8px;
+  position: relative;
+  top: 250px;
+  display: flex;
+  padding: 30px;
+  margin: auto;
+  text-align: left;
+}
+
+legend {
+  font-family: Verdana, Georgia, Courier, serif;
+  font-size: 35px;
+  font-weight: bold;
+  color: #3498DB;
+}
+
+#enter-username, #enter-password {
+  font-size: 25px;
+  width: 500px;
+  position: relative;
+  float: bottom;
 }
