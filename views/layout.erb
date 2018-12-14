@@ -8,6 +8,13 @@
     <header>
       <h1 id="brand-header">Bookmarker</h1>
     </header>
+    <% if @user %>
+    <form action="/sessions/delete" method="post">
+        <input type="hidden" name="_method" value="DELETE"/>
+        <input id="sign-out" type="submit" name="sign-out"
+        value="Sign out" alt="Button to sign out a logged in user"/>
+    </form>
+  <% end %>
   <head>
   <body>
     <%= yield %>

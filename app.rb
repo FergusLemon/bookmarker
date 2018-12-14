@@ -43,6 +43,12 @@ class Bookmarker < Sinatra::Base
     end
   end
 
+  delete '/sessions/delete' do
+    session.clear
+    flash[:log_out_successful] = 'You have successfully logged out'
+    redirect '/'
+  end
+
   post '/users' do
     user = User.create(username: params['username'], password: params['password'])
     session[:user_id] = user.id
