@@ -42,6 +42,12 @@ body {
   right: 200px;
 }
 
+#logged-in-message {
+  position: absolute;
+  right: 500px;
+  top: 35px;
+}
+
 fieldset {
   width: 500px;
   border: 1px solid #3498DB;

@@ -10,7 +10,7 @@
 </div>
 <br/>
   <% if @user %>
-    <h3><%= "Logged in as #{@user.username}" %></h3>
+    <h3 id="logged-in-message"><%= "Logged in as #{@user.username}" %></h3>
   <% end %>
 <table id="bookmark-table">
   <% if @bookmarks.empty? %>

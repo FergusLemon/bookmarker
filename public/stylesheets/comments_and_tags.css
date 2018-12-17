@@ -1,0 +1,21 @@
+#submit-comment, #homepage, #create-tag {
+  border-radius: 8px;
+  border-color: #138D75;
+  background-color: #3498DB;
+  color: #F7F9F9;
+  margin-left: 40px;
+}
+
+#comment, #tag {
+  font-size: 15px;
+  width: 50%;
+  display: block;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin: 8px 40px;
+}
+
+#tag-message {
+  font-size: 20px;
+  margin-left: 40px;
+}

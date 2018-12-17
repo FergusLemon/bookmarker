@@ -1,8 +1,7 @@
 <div id="add-tag">
   <% bookmark = @bookmarks.select { |b| b.id == @bookmark_id } %>
   <form action="/bookmarks/<%= bookmark.first.id %>/tag" method="post">
-    <input id="tag" type="text-area" name="content" placeholder="Write tag..."
-    alt="Text box for adding a tag to a bookmark"/>
+    <textarea id="tag" name="content" alt="Text box for adding a tag to a bookmark"/> Enter a tag...</textarea>
     <input id="create-tag" type="submit" name="create-tag"
     value="Create Tag" alt="Button to add a tag to a bookmark"/>
   </form>
