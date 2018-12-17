@@ -22,7 +22,7 @@ end
 task :setup do
   p "Creating databases..."
 
-  ['bookmark_manager', 'bookmark_manager_test'].each do |database|
+  ['bookmarker', 'bookmarker_test'].each do |database|
     connection = PG.connect
     connection.exec("CREATE DATABASE #{ database };")
     connection = PG.connect(dbname: database)
