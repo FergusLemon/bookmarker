@@ -28,8 +28,11 @@ The decision was made to ignore some recommendations relating to line length due
 
 ### Technologies Used
 Written in Ruby, SQL, HTML and CSS.
+
 Postgres Database.
+
 Sinatra as the web framework.
+
 Tests run using RSpec and Capybara.
 
 ### Dependencies
